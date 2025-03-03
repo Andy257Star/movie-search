@@ -1,11 +1,12 @@
 import mysql.connector
-from db_config import get_log_db_connection
+from db_config import LOG_DB_CONFIG
 
 class QueryLogger:
     def __init__(self):
-        self.conn = get_log_db_connection()
+        self.conn = mysql.connector.connect(**LOG_DB_CONFIG)
         self.cursor = self.conn.cursor()
         self.create_table()
+
 
     def create_table(self):
         query = """

@@ -1,11 +1,13 @@
-from db_config import get_db_connection
+import mysql.connector
+from db_config import DB_CONFIG
 from logs import QueryLogger
 
 class MovieSearch:
     def __init__(self):
-        self.conn = get_db_connection()
+        self.conn = mysql.connector.connect(**DB_CONFIG)
         self.cursor = self.conn.cursor()
         self.logger = QueryLogger()
+
 
     def search_by_keyword(self, keywords):
         words = keywords.split()
